@@ -1,5 +1,6 @@
 package geometry_objects;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -69,12 +70,14 @@ public class Segment extends GeometricObject
 	 * @param candidate
 	 * @return true if this segment contains candidate as subsegment.
 	 */
-	public boolean HasSubSegment(Segment candidate){
+	public boolean HasSubSegment(Segment candidate)
+	{
+		//	if the segment is collinear with the candidate and both points of the 
+		//	candidate lie on the segment, return true 
+		if (! this.isCollinearWith(candidate)) return false;
 		
-		if (this.equals(candidate)) return true;
-		if (!this.pointLiesOnSegment(candidate.getPoint1())) return false;
-		return (this.pointLiesOnSegment(candidate.getPoint2()));
-
+		//	if both points of this are not between the endpoints of that, return true 
+		return (this.pointLiesOnSegment(candidate.getPoint1()) && this.pointLiesOnSegment(candidate.getPoint2()));
 	}
 
 	/**
@@ -102,7 +105,7 @@ public class Segment extends GeometricObject
 		if (obj == null) return false;
 		
 		if (!(obj instanceof Segment)) return false;
-		Segment that = (Segment)obj;
+		Segment that = (Segment) obj;
 
 		return this.has(that.getPoint1()) && this.has(that.getPoint2());
 	}
@@ -161,17 +164,14 @@ public class Segment extends GeometricObject
 	 * 
 	 * Note: the segment MAY share an endpoint
 	 */
-
 	public boolean coincideWithoutOverlap(Segment that)
 	{
-		if (!this.isCollinearWith(that)) return false;
-		//if the point does not lie b/w endpoints 1 and 2 on this segment or that segment return 
-		return !(this.pointLiesBetweenEndpoints(that.getPoint1()) ||
-			this.pointLiesBetweenEndpoints(that.getPoint2()) 
-			|| that.pointLiesBetweenEndpoints(this.getPoint1()) 
-			|| that.pointLiesBetweenEndpoints(this.getPoint2()));
-	}	
+		//	if that segment is collinear with this, and this does not contain that as a subsegment 
+		if (! this.isCollinearWith(that) || this.HasSubSegment(that)) return false;
 		
+		//	if both points of this are not between the endpoints of that, return true 
+		return (!this.pointLiesBetweenEndpoints(that.getPoint1()) && !this.pointLiesBetweenEndpoints(that.getPoint2()));
+	}
 	
 	/**
 	 *   Example:
@@ -190,16 +190,56 @@ public class Segment extends GeometricObject
 	 *
 	 * @return the sorted subset of Points that lie on this segment (ordered lexicographically)
 	 */
-	//if the points in the sorted set are not lexicographic, then return null?
-	//if points in the sorted set are lexicographic, then return pointsOn?
 	public SortedSet<Point> collectOrderedPointsOnSegment(Set<Point> points)
 	{
+		//	automatically add the end points of a segment to the set 
 		SortedSet<Point> pointsOn = new TreeSet<Point>();
+		//List<Point> name = new points.stream.tolist
 		
-		for(Point p: points) {
-			if (this.pointLiesOn(p)) pointsOn.add(p);
-		}	
+		pointsOn.add(this.getPoint1());
+		pointsOn.add(this.getPoint2());
+		
+		//	for each point in the set of points given, if it lies on the segment, add it to the set 
+		//	because this is a sorted set, it will automatically use the lexicographicOrdering method defined in the Point class
+		for (Point pt : points) {
+			if (this.pointLiesOnSegment(pt)) pointsOn.add(pt);
+		}
 		return pointsOn;
 	}
+	
+	@Override
+    public String toString()
+    {
+		return String.format("Seg(%s, %s)%n", _point1.toString(), _point2.toString());
+	}
+	
+	/*
+     * @param thisRay -- a ray
+     * @param thatRay -- a ray
+     * @return Does thatRay overlay thisRay? As in, both share same origin point, but other two points
+     * are not common: one extends over the other.
+     */
+    public static boolean overlaysAsRay(Segment left, Segment right)
+    {
+    	// Equal segments overlay
+    	if (left.equals(right)) return true;
+
+    	// Get point where they share an endpoint
+    	Point shared = left.sharedVertex(right);
+    	if (shared == null) return false;
+
+    	// Collinearity is required
+    	if (!left.isCollinearWith(right)) return false;
+    	
+    	Point otherL = left.other(shared);
+    	Point otherR = right.other(shared);
+    	
+        // Rays pointing in the same direction?
+        // Avoid: <--------------------- . ---------------->
+        //      V------------W------------Z
+                                     // middle  endpoint  endpoint
+        return GeometryUtilities.between(otherL, shared, otherR) ||
+        	   GeometryUtilities.between(otherR, shared, otherL);
+    }
 	
 }
