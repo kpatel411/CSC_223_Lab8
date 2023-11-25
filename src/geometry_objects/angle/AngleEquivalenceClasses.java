@@ -22,5 +22,10 @@ import utilities.eq_classes.EquivalenceClasses;
  */
 public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 {
+
+	public Object numClasses() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	// TODO
 }
