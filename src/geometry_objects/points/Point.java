@@ -117,4 +117,11 @@ public class Point implements Comparable<Point>
 	public String toString() {
 		return this.getName();
 	}
+
+	public static int distance(Point a, Point b) {
+		// TODO Auto-generated method stub
+		int x_vals = (int) ((a.getX() - b.getX())) ^ 2;
+		int y_vals = (int) ((a.getY() - b.getY())) ^ 2;
+		return (int) Math.sqrt(x_vals + y_vals);
+	}
 }
