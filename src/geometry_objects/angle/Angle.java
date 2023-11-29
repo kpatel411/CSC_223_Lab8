@@ -175,8 +175,14 @@ public class Angle implements Comparable<Angle>
 	{
 		Angle angle = (Angle) obj;
 		
-		return this.compareTo(angle) == 0;
+//		return this.compareTo(angle) == 0;
+		//always true 
 		
+//		if (this.getVertex().equals(angle.getVertex()) &&  
+//			this._measure == angle._measure && 
+//			this.compareTo(angle) == 0) return true;
+//		return false;
+		//always false 
 		
 		// TODO: ask Dr. Alvin because this seems to easy??
 	}
