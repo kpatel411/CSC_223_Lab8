@@ -1,5 +1,7 @@
 package geometry_objects.angle;
 
+import java.util.function.BooleanSupplier;
+
 import geometry_objects.angle.comparators.AngleStructureComparator;
 import utilities.eq_classes.EquivalenceClasses;
 
@@ -28,4 +30,14 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 		return null;
 	}
 	// TODO
+
+	public Object size() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BooleanSupplier contains(Angle expected) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
