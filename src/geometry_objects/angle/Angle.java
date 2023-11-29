@@ -173,6 +173,10 @@ public class Angle implements Comparable<Angle>
 	@Override
 	public boolean equals(Object obj)
 	{
-		// TODO
+		Angle angle = (Angle) obj;
+		
+		return this.compareTo(angle) == 0;
+		
+		// TODO: ask Dr. Alvin because this seems to easy??
 	}
 }
