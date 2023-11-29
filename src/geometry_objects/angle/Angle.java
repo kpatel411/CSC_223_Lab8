@@ -177,6 +177,7 @@ public class Angle implements Comparable<Angle>
 		
 		return this.compareTo(angle) == 0;
 		
+		
 		// TODO: ask Dr. Alvin because this seems to easy??
 	}
 }
