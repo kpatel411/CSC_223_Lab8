@@ -60,6 +60,44 @@ public class AngleStructureComparator implements Comparator<Angle>
 	@Override
 	public int compare(Angle left, Angle right)
 	{
-        // TODO
+		
+		Segment left_ray_1 = left.overlayingRay(right.getRay1());
+        Segment right_ray_1 = right.getRay1();
+        
+        Segment left_ray_2 = left.overlayingRay(right.getRay2());
+        Segment right_ray_2 = right.getRay2();
+		
+		// immediately structurally incomparable case:
+			// angles don't share vertices 
+        	// either overlapping ray is null (the angles are different)
+        	// this is case 1: returns Integer.MAX_VALUE
+        if (left_ray_1 == null || right_ray_1 == null) return STRUCTURALLY_INCOMPARABLE;
+        
+        
+        // this is case 2: 	if BOTH RAYS in the LEFT angle are GREATER than or equal in length 
+        // 					to the corresponding rays in the right angle
+        //					then return 1
+        if (MathUtilities.doubleEquals(left_ray_1.length(), right_ray_1.length()) 
+        	|| (left_ray_1.length() > right_ray_1.length()) && 
+        	MathUtilities.doubleEquals(left_ray_2.length(), right_ray_2.length()) 
+        	|| (left_ray_2.length() > right_ray_2.length())) return 1;
+        
+        // this is case 3: 	if BOTH RAYS in the LEFT angle are LESS than or equal in length 
+        // 					to the corresponding rays in the right angle
+        //					then return -1
+        if (MathUtilities.doubleEquals(left_ray_1.length(), right_ray_1.length()) 
+            	|| (left_ray_1.length() < right_ray_1.length()) && 
+            	MathUtilities.doubleEquals(left_ray_2.length(), right_ray_2.length()) 
+            	|| (left_ray_2.length() < right_ray_2.length())) return -1;
+        
+        // this is case 4: 	if BOTH RAYS in the LEFT angle are LESS than or GREATER than in length 
+        // 					to the corresponding rays in the right angle
+        //					then return 0
+        if ((left_ray_1.length() > right_ray_1.length()) 
+            	|| (left_ray_2.length() < right_ray_2.length()) && 
+            	(left_ray_1.length() < right_ray_1.length()) 
+            	|| (left_ray_2.length() > right_ray_2.length())) return 0;
+        
+        return STRUCTURALLY_INCOMPARABLE;
 	}
 }
