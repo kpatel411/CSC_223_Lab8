@@ -1,5 +1,8 @@
 package geometry_objects;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,23 +43,11 @@ public class AngleClassTest {
 		segsAsList.add(segCG);
 		segsAsList.add(segCF);
 		
-		List<Angle> angles = new ArrayList<Angle>();
-		for (Segment seg_1 : segsAsList) {
-			for (Segment seg_2 : segsAsList) {
-				if (!seg_1.equals(seg_2)) {
-					angles.add(new Angle(seg_1, seg_2));
-				}
-			}
-		}
-		
-		for (Angle angle_1 : angles) {
-			for (Angle angle_2 : angles) {
-				System.out.println(angle_1 + "\n" + angle_2 + "\n" + angle_1.equals(angle_2));
-				System.out.println(angle_1.compareTo(angle_2));
-				System.out.println(" ");
-			}
-		}
-		
+		assertTrue(new Angle(segCF, segCA).equals(new Angle(segCA, segCF)));
+		assertTrue(new Angle(segCB, segCE).equals(new Angle(segCE, segCB)));
+		assertFalse(new Angle(segCF, segCA).equals(new Angle(segCB, segCE)));
+		assertFalse(new Angle(segCB, segCA).equals(new Angle(segCA, segCG)));
+
 	}
 	
 }

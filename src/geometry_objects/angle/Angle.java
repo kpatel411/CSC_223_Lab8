@@ -175,15 +175,14 @@ public class Angle implements Comparable<Angle>
 	{
 		Angle angle = (Angle) obj;
 		
-//		return this.compareTo(angle) == 0;
-		//always true 
+		//two angles are equal if all of their vertices are the same (the 3 points) 
+		//strict equality 
 		
-//		if (this.getVertex().equals(angle.getVertex()) &&  
-//			this._measure == angle._measure && 
-//			this.compareTo(angle) == 0) return true;
-//		return false;
-		//always false 
-		
-		// TODO: ask Dr. Alvin because this seems to easy??
+		if (this._vertex.equals(angle._vertex) && 
+			(this._ray1Endpoint.equals(angle._ray1Endpoint) || this._ray1Endpoint.equals(angle._ray2Endpoint)) &&
+			(this._ray2Endpoint.equals(angle._ray1Endpoint) || this._ray2Endpoint.equals(angle._ray2Endpoint))) {
+			return true;
+					}
+		return false; 
 	}
 }
