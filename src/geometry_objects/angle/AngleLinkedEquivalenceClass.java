@@ -1,7 +1,10 @@
 package geometry_objects.angle;
 
+import java.util.Comparator;
+import java.util.LinkedList;
+
 import geometry_objects.angle.comparators.AngleStructureComparator;
-import utilities.eq_classes.LinkedEquivalenceClass;
+import utilities.eq_classes.LinkedEquivalence;
 
 /**
  * This implementation requires greater knowledge of the implementing Comparator.
@@ -23,7 +26,21 @@ import utilities.eq_classes.LinkedEquivalenceClass;
  * 
  * @author XXX
  */
-public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
+public class AngleLinkedEquivalenceClass extends LinkedEquivalence<Angle>
 {
-    // TODO
+	public AngleLinkedEquivalenceClass(Comparator<Angle> m) {
+		super(m);
+	}
+	
+	@Override 
+	/**
+	 * belongs() method for LinkedEquivalence class
+	 * @param target contains the element you are checking 
+	 * @return true if the element does belong in the list 
+	 */
+	public boolean belongs(Angle target) {
+		//checks to see if number after comparator belongs
+		if (_canonical == null) return false;
+		return (_comparator.compare(_canonical, target) != AngleStructureComparator.STRUCTURALLY_INCOMPARABLE);
+	}
 }

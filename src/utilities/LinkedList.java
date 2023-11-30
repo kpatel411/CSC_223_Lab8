@@ -2,7 +2,7 @@
  * @authors Khushi Patel, Grace Warren
  * Course: CSC-223
  */
-package input.components.LinkedList;
+package utilities;
 
 /**
  * public class LinkedList implement a generic singly linked list 

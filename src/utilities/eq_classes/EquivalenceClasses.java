@@ -2,7 +2,7 @@
  * @authors Khushi Patel, Grace Warren
  * Course: CSC-223
  */
-package input.components.LinkedList;
+package utilities.eq_classes;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;

@@ -2,8 +2,10 @@
  * @authors Khushi Patel, Grace Warren
  * Course: CSC-223
  */
-package input.components.LinkedList;
-import java.util.Comparator; 
+package utilities.eq_classes;
+import java.util.Comparator;
+
+import utilities.LinkedList; 
 
 /**
  * public class LinkedEquivalence filters items with a _canonical value, 
