@@ -50,7 +50,7 @@ class AngleIdentifierTest
 	// This figure contains 44 angles
 	//
 	@Test
-	void test_crossing_symmetric_triangle()
+	void test_crossing_symmetric_triangle() throws FactException
 	{
 		init("crossing_symmetric_triangle.json");
 

@@ -25,7 +25,7 @@ public class AngleIdentifier
 	{
 		if (_angles != null) return _angles;
 
-		_angles = new AngleEquivalenceClasses(null); //we added the null
+		_angles = new AngleEquivalenceClasses(); //we added the null
 
 		computeAngles();
 
