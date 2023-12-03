@@ -1,12 +1,16 @@
 package preprocessor;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import exceptions.FactException;
 import geometry_objects.Segment;
 import geometry_objects.angle.Angle;
 import geometry_objects.angle.AngleEquivalenceClasses;
+import geometry_objects.points.*;
+import utilities.math.MathUtilities;
 
 public class AngleIdentifier
 {
@@ -36,6 +40,7 @@ public class AngleIdentifier
 	{
 		//	make the _segments iterable
 		List<Segment> segsAsList = _segments.keySet().stream().toList(); 
+		Set<Angle> angles = new HashSet<Angle>();
 		
 		//	use indexed for loops to create combinations 
 		for (int index_1 = 0; index_1 < segsAsList.size() - 1; index_1++) {
@@ -43,14 +48,22 @@ public class AngleIdentifier
 				
 				Segment seg1 = segsAsList.get(index_1);
 				Segment seg2 = segsAsList.get(index_2);
+				Point vertex = seg1.sharedVertex(seg2);
 				
 				//	make sure the segments are valid to create an angle
-				if ((seg1.sharedVertex(seg2) != null) &&
-					(Segment.overlaysAsRay(seg1, seg2))) {
+				if ((vertex != null) && (seg1.other(vertex) != seg2.other(vertex))) {
 					
-					_angles.add(new Angle(seg1, seg2));
+					Angle potentialAngle =  new Angle(seg1, seg2);
+					
+					if (!MathUtilities.doubleEquals(potentialAngle.getMeasure(), 0.0)) {
+						angles.add(potentialAngle);
+					}
 				}	
 			}
+		}	
+		
+		for (Angle a : angles) {
+			_angles.add(a);
 		}
 	}
 }
