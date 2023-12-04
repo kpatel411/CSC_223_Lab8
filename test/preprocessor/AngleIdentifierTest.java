@@ -59,7 +59,8 @@ class AngleIdentifierTest
 		AngleEquivalenceClasses computedAngles = angleIdentifier.getAngles();
 
 		// The number of classes should equate to the number of 'minimal' angles
-                                                                               		
+//		assertEquals("Number of Angle Equivalence classes", 25, computedAngles.numClasses());
+		
 		//
 		// ALL original segments: 8 in this figure.
 		//
@@ -89,7 +90,7 @@ class AngleIdentifierTest
 		//
 		Segment ad = new Segment(_points.getPoint("A"), _points.getPoint("D"));
 		Segment ae = new Segment(_points.getPoint("A"), _points.getPoint("E"));
-		
+
 		//
 		// Angles we expect to find
 		//
@@ -136,7 +137,7 @@ class AngleIdentifierTest
 			expectedAngles.add(new Angle(ac, cd));
 
 			expectedAngles.add(new Angle(bc, a_star_c));
-			expectedAngles.add(new Angle(cd, bd));
+			expectedAngles.add(new Angle(cd, bc));
 			
 			expectedAngles.add(new Angle(a_star_c, ce));
 			expectedAngles.add(new Angle(cd, ce));
@@ -168,7 +169,7 @@ class AngleIdentifierTest
 			expectedAngles.add(new Angle(a_star_e, ce));
 			expectedAngles.add(new Angle(be, ae));
 			expectedAngles.add(new Angle(be, ce));
-			expectedAngles.add(new Angle(a_star_e, ce));
+			expectedAngles.add(new Angle(a_star_e, ae));
 
 			
 			// More singletons
@@ -183,18 +184,17 @@ class AngleIdentifierTest
 		}
 		catch (FactException te) { System.err.println("Invalid Angles in Angle test."); }
 
-		System.out.println("Expected Angles: " + expectedAngles.toString());
-		System.out.println("Our Angles: " + computedAngles.toString());
-		
+		System.out.println("Expected Angles: " + expectedAngles);
+		System.out.println("Our Angles: " + computedAngles);
 		
 		assertEquals(expectedAngles.size(), computedAngles.size());
-		
 		
 		//
 		// Equality
 		//
 		for (Angle expected : expectedAngles)
 		{
+			System.out.println(expected);
 			assertTrue(computedAngles.contains(expected));
 		}
 	}

@@ -118,9 +118,9 @@ public class Point implements Comparable<Point>
 		return this.getName();
 	}
 
-	public static int distance(Point a, Point b) {
-		int x_vals = (int) ((a.getX() - b.getX())) ^ 2;
-		int y_vals = (int) ((a.getY() - b.getY())) ^ 2;
-		return (int) Math.sqrt(x_vals + y_vals);
+	public static double distance(Point a, Point b) {
+		double x_vals = Math.pow((b.getX() - a.getX()), 2);
+		double y_vals = Math.pow((b.getY() - a.getY()), 2);
+		return Math.sqrt(x_vals + y_vals);
 	}
 }

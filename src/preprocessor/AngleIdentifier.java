@@ -53,10 +53,14 @@ public class AngleIdentifier
 				//	make sure the segments are valid to create an angle
 				if ((vertex != null) && (seg1.other(vertex) != seg2.other(vertex))) {
 					
-					Angle potentialAngle =  new Angle(seg1, seg2);
-					
-					if (!MathUtilities.doubleEquals(potentialAngle.getMeasure(), 0.0)) {
-						angles.add(potentialAngle);
+					try {
+						Angle potentialAngle =  new Angle(seg1, seg2);	
+						if (!MathUtilities.doubleEquals(potentialAngle.getMeasure(), 0.0)) {
+							angles.add(potentialAngle);
+						}
+					}
+					catch (FactException fe) {
+						System.err.println("Invalid Angles as potentialAngle.");
 					}
 				}	
 			}

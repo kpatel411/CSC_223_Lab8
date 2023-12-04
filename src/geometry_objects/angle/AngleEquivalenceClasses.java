@@ -50,16 +50,6 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 	 */
 	public boolean add(Angle element) {
 		return super.add(element);
-		
-//		if (element == null) return false;
-//		int index = indexOfClass(element);
-//		if (index == -1) {
-//			_classes.add(new LinkedEquivalence<Angle>(_comparator));
-//			index = _classes.size()-1;
-//		}
-//		if (_classes.get(index).contains(element)) return false;
-//		_classes.get(index).add(element);
-//		return true;
 	}
 	
 }
