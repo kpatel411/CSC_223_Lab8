@@ -60,7 +60,7 @@ public class AngleIdentifier
 						}
 					}
 					catch (FactException fe) {
-						System.err.println("Invalid Angles as potentialAngle.");
+						System.err.println("Invalid angle as potentialAngle - angle was ZERO.");
 					}
 				}	
 			}
