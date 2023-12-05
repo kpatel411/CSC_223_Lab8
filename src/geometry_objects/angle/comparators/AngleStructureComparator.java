@@ -12,12 +12,9 @@
 package geometry_objects.angle.comparators;
 
 import java.util.Comparator;
-
 import geometry_objects.Segment;
 import geometry_objects.angle.Angle;
-import geometry_objects.points.Point;
 import utilities.math.MathUtilities;
-import utilities.math.analytic_geometry.GeometryUtilities;
 
 public class AngleStructureComparator implements Comparator<Angle>
 {

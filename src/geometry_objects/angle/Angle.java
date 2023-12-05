@@ -175,9 +175,8 @@ public class Angle implements Comparable<Angle>
 	{
 		Angle angle = (Angle) obj;
 		
-		//two angles are equal if all of their vertices are the same (the 3 points) 
-		//strict equality 
-		
+		// two angles are equal if all of their vertices are the same (the 3 points) 
+		// instance of strict point equality 
 		if (this._vertex.equals(angle._vertex) && 
 			(this._ray1Endpoint.equals(angle._ray1Endpoint) || this._ray1Endpoint.equals(angle._ray2Endpoint)) &&
 			(this._ray2Endpoint.equals(angle._ray1Endpoint) || this._ray2Endpoint.equals(angle._ray2Endpoint))) {

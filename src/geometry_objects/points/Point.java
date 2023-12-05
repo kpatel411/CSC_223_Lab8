@@ -118,6 +118,7 @@ public class Point implements Comparable<Point>
 		return this.getName();
 	}
 
+	// distance is calculated with the distance formula below
 	public static double distance(Point a, Point b) {
 		double x_vals = Math.pow((b.getX() - a.getX()), 2);
 		double y_vals = Math.pow((b.getY() - a.getY()), 2);
