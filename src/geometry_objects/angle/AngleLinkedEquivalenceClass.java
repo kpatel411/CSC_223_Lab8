@@ -59,7 +59,7 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalence<Angle>
 			return true;
 		}
 		// if the element belongs, add it to the _rest
-		if (belongs(element)) {
+		if (belongs(element)) { //if !belongs return false; 
 			// if the angle is smaller than the current canonical,
 			// add with demoteAndSetCanonical()
 			if (_comparator.compare(element, _canonical) < 0) {

@@ -39,7 +39,7 @@ public class TriangleIdentifier
 	private void computeTriangles()
 	{
 		//this makes the _segments iterable, and eliminates redundancy by calling keySet()
-		List<Segment> segsAsList = _segments.keySet().stream().toList();
+		List<Segment> segsAsList = _segments.keySet().stream().toList(); 
 		
 		//these three indexed for loops go over all possible combinations of segments
 		for (int index_1 = 0; index_1 < segsAsList.size() - 2; index_1++) {
