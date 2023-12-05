@@ -170,7 +170,8 @@ public class Segment extends GeometricObject
 		if (! this.isCollinearWith(that) || this.HasSubSegment(that)) return false;
 		
 		//	if both points of this are not between the endpoints of that, return true 
-		return (!this.pointLiesBetweenEndpoints(that.getPoint1()) && !this.pointLiesBetweenEndpoints(that.getPoint2()));
+		return ((!this.pointLiesBetweenEndpoints(that.getPoint1())) && (!this.pointLiesBetweenEndpoints(that.getPoint2())) && 
+				(!that.pointLiesBetweenEndpoints(this.getPoint1())) && (!that.pointLiesBetweenEndpoints(this.getPoint2())));
 	}
 	
 	/**

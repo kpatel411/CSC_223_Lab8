@@ -59,7 +59,7 @@ class AngleIdentifierTest
 		AngleEquivalenceClasses computedAngles = angleIdentifier.getAngles();
 
 		// The number of classes should equate to the number of 'minimal' angles
-//		assertEquals("Number of Angle Equivalence classes", 25, computedAngles.numClasses());
+		assertEquals("Number of Angle Equivalence classes", 25, computedAngles.numClasses());
 		
 		//
 		// ALL original segments: 8 in this figure.
@@ -184,9 +184,6 @@ class AngleIdentifierTest
 		}
 		catch (FactException te) { System.err.println("Invalid Angles in Angle test."); }
 
-		System.out.println("Expected Angles: " + expectedAngles);
-		System.out.println("Our Angles: " + computedAngles);
-		
 		assertEquals(expectedAngles.size(), computedAngles.size());
 		
 		//
@@ -194,7 +191,6 @@ class AngleIdentifierTest
 		//
 		for (Angle expected : expectedAngles)
 		{
-			System.out.println(expected);
 			assertTrue(computedAngles.contains(expected));
 		}
 	}

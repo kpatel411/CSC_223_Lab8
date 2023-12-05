@@ -29,7 +29,7 @@ public class AngleIdentifier
 	{
 		if (_angles != null) return _angles;
 
-		_angles = new AngleEquivalenceClasses(); //we added the null
+		_angles = new AngleEquivalenceClasses();
 
 		computeAngles();
 
@@ -40,34 +40,21 @@ public class AngleIdentifier
 	{
 		//	make the _segments iterable
 		List<Segment> segsAsList = _segments.keySet().stream().toList(); 
-		Set<Angle> angles = new HashSet<Angle>();
-		
+
 		//	use indexed for loops to create combinations 
 		for (int index_1 = 0; index_1 < segsAsList.size() - 1; index_1++) {
-			for (int index_2 = index_1; index_2 < segsAsList.size(); index_2++) {
-				
+			for (int index_2 = index_1 + 1; index_2 < segsAsList.size(); index_2++) {
+
 				Segment seg1 = segsAsList.get(index_1);
 				Segment seg2 = segsAsList.get(index_2);
 				Point vertex = seg1.sharedVertex(seg2);
-				
+
 				//	make sure the segments are valid to create an angle
-				if ((vertex != null) && (seg1.other(vertex) != seg2.other(vertex))) {
-					
-					try {
-						Angle potentialAngle =  new Angle(seg1, seg2);	
-						if (!MathUtilities.doubleEquals(potentialAngle.getMeasure(), 0.0)) {
-							angles.add(potentialAngle);
-						}
-					}
-					catch (FactException fe) {
-						System.err.println("Invalid angle as potentialAngle - angle was ZERO.");
-					}
+				if ((vertex != null) && (seg1.other(vertex) != seg2.other(vertex)) && (!Segment.overlaysAsRay(seg1, seg2))) {
+
+					_angles.add(new Angle(seg1, seg2));
 				}	
 			}
 		}	
-		
-		for (Angle a : angles) {
-			_angles.add(a);
-		}
 	}
 }
