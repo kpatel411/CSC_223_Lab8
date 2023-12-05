@@ -56,6 +56,7 @@ class TriangleIdentifierTest
 		TriangleIdentifier triIdentifier = new TriangleIdentifier(_segments);
 
 		Set<Triangle> computedTriangles = triIdentifier.getTriangles();
+		
 
 		System.out.println(computedTriangles);
 
@@ -122,4 +123,74 @@ class TriangleIdentifierTest
 			assertTrue(expectedTriangles.contains(computedTriangle));
 		}
 	}
+	
+	@Test
+	void test_Square_with_Line() {
+	    init("Square_with_Line.json");
+
+	    TriangleIdentifier triIdentifier = new TriangleIdentifier(_segments);
+
+	    Set<Triangle> computedTriangles = triIdentifier.getTriangles();
+	    
+
+		System.out.println(computedTriangles);
+
+	    assertEquals(2, computedTriangles.size());
+
+	    // Segments specified in the test case
+	    Segment ab = new Segment(_points.getPoint("A"), _points.getPoint("B"));
+	    Segment ad = new Segment(_points.getPoint("A"), _points.getPoint("D"));
+	    Segment bc = new Segment(_points.getPoint("B"), _points.getPoint("C"));
+	    Segment cd = new Segment(_points.getPoint("C"), _points.getPoint("D"));
+	    Segment bd = new Segment(_points.getPoint("B"), _points.getPoint("D"));
+
+	    // Expected triangles
+	    List<Triangle> expectedTriangles = new ArrayList<>();
+	    try {
+	        expectedTriangles.add(new Triangle(Arrays.asList(ab, ad, bd)));
+	        expectedTriangles.add(new Triangle(Arrays.asList(bc, cd, bd)));
+	    } 
+	    catch (FactException te) {
+	        System.err.println("Invalid triangles in triangle test.");
+	    }
+
+	    assertEquals(expectedTriangles.size(), computedTriangles.size());
+
+	    for (Triangle computedTriangle : computedTriangles) {
+	        assertTrue(expectedTriangles.contains(computedTriangle));
+	    }
+	}
+	
+	
+	@Test
+	void test_single_triangle() {
+	 
+	    init("single_triangle.json");
+
+	    TriangleIdentifier triIdentifier = new TriangleIdentifier(_segments);
+	    
+	    Set<Triangle> computedTriangles = triIdentifier.getTriangles();
+
+	    assertEquals(1, computedTriangles.size());
+	    
+	    //System.out.println(computedTriangles);
+
+	    // Expected triangle based on the input JSON
+	    Segment ab = new Segment(_points.getPoint("A"), _points.getPoint("B"));
+	    Segment ac = new Segment(_points.getPoint("A"), _points.getPoint("C"));
+	    Segment bc = new Segment(_points.getPoint("B"), _points.getPoint("C"));
+
+	    List<Triangle> expectedTriangles = new ArrayList<>();
+	    
+	    try {
+	        expectedTriangles.add(new Triangle(Arrays.asList(ab, ac, bc)));
+	    } 
+	    catch (FactException te) {
+	        System.err.println("Invalid triangles in triangle test.");
+	    }
+
+	    assertTrue(computedTriangles.containsAll(expectedTriangles));
+	}
+
 }
+	 
