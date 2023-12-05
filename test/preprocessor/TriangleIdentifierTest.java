@@ -26,7 +26,7 @@ class TriangleIdentifierTest
 	
 	protected void init(String filename)
 	{
-		FigureNode fig = InputFacade.extractFigure("crossing_symmetric_triangle.json");
+		FigureNode fig = InputFacade.extractFigure(filename);
 
 		Map.Entry<PointDatabase, Set<Segment>> pair = InputFacade.toGeometryRepresentation(fig);
 
@@ -173,7 +173,7 @@ class TriangleIdentifierTest
 
 	    assertEquals(1, computedTriangles.size());
 	    
-	    //System.out.println(computedTriangles);
+	    System.out.println(computedTriangles);
 
 	    // Expected triangle based on the input JSON
 	    Segment ab = new Segment(_points.getPoint("A"), _points.getPoint("B"));
@@ -189,7 +189,9 @@ class TriangleIdentifierTest
 	        System.err.println("Invalid triangles in triangle test.");
 	    }
 
-	    assertTrue(computedTriangles.containsAll(expectedTriangles));
+	    for (Triangle computedTriangle : computedTriangles) {
+	        assertTrue(expectedTriangles.contains(computedTriangle));
+	 	}
 	}
 
 }
