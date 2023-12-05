@@ -1,16 +1,16 @@
 package preprocessor;
 
-import java.util.HashSet;
+//import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+//import java.util.Set;
 
 import exceptions.FactException;
 import geometry_objects.Segment;
 import geometry_objects.angle.Angle;
 import geometry_objects.angle.AngleEquivalenceClasses;
 import geometry_objects.points.*;
-import utilities.math.MathUtilities;
+//import utilities.math.MathUtilities;
 
 public class AngleIdentifier
 {
@@ -36,6 +36,14 @@ public class AngleIdentifier
 		return _angles;
 	}
 
+	/***
+	 * computeAngles() method to create/find angles
+	 * by creating a list of all segments, iterate to create valid angles
+	 * based on endpoints using a combinations technique.
+	 * Then get two segments and find the shared vertex between the two.
+	 * If the vertex is valid/matching and the segemnts do not overlap create the angle and add it to the list. 
+	 * @throws FactException n/a
+	 */
 	private void computeAngles() throws FactException
 	{
 		//	make the _segments iterable

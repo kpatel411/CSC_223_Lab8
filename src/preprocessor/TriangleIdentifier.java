@@ -1,7 +1,7 @@
 package preprocessor;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+//import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +36,13 @@ public class TriangleIdentifier
 		return _triangles;
 	}
 
+	/***
+	 * computeTriangles() method to create/find triangles
+	 * creates a list of all segments with the keySet(), 
+	 * iterates using a combinations technique.
+	 * Then get 3 segments and add it to as new Triangle object to the set.
+	 * contains a throw catch for any obsure cases.
+	 */
 	private void computeTriangles()
 	{
 		List<Segment> segsAsList = _segments.keySet().stream().toList();

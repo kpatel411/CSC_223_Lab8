@@ -71,7 +71,6 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalence<Angle>
 		return true;
 	}
 	
-	//TODO:
 	/**
 	 * demoteAndSetCanonical() method for LinkedEquivalence class
 	 * checks if the element is valid
@@ -95,6 +94,14 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalence<Angle>
 		return false;
 	}
 	
+	/**
+	 * removeCanonical() method for LinkedEquivalence class
+	 * removes a current canonical value in a non-empty list
+	 * checks if the canonical is null, if so, immediately set the canonical to that value 
+	 * set the next item in the list as the canonical element 
+	 * @param element contains the new canonical value
+	 * @return true if the canonical is successfully removed 
+	 */
 	@Override 
 	public boolean removeCanonical() {
 		if (isEmpty()) return false;
