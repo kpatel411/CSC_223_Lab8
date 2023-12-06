@@ -88,12 +88,10 @@ public class LinkedEquivalence<T> {
 			_rest.remove(element);
 			return true;
 		}
-		if (belongs(element)) {
-			if (_rest.contains(element)) return false;
-			_rest.addToBack(element);
-			return true;
-		}
-		return false;
+		if (!belongs(element)) return false;
+		if (_rest.contains(element)) return false;
+		_rest.addToBack(element);
+		return true;
 	}
 
 	/**
